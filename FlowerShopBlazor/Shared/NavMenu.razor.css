@@ -1,0 +1,58 @@
+header{
+    display: flex;
+    justify-content: center;
+    border-bottom: 0.1rem solid transparent;
+}
+header:hover{
+    border-bottom: 0.1rem solid rgba(174, 174, 174, 0.4);
+    transition: 0.5s;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav li{
+    min-height: 89px;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+nav span{
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 0.7rem 0 0.1rem 0;
+    border-bottom: 0.15rem solid transparent;
+    user-select: none;
+}
+nav span:hover, 
+nav span:focus{
+    border-bottom: 0.15rem solid black;
+}
+
+@media (max-width: 940px) {
+    header,
+    nav ul{
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav{
+        display: none;
+    }
+    nav.show{
+        display: block;
+    }
+
+    nav li{
+        min-height: 0;
+        margin: 0.3rem;
+        justify-content: center;
+    }
+}
