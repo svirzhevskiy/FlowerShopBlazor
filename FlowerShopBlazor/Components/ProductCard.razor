@@ -3,11 +3,11 @@
 <div class="card">
     <img src="@Model.Image" alt="product image"/>
     <div class="title">@Model.Title</div>
-    <span class="price">$@Model.Price</span>
+    <span class="price">@Model.Price.ToString("C0")</span>
     <Button>ADD TO CART</Button>
     @if (Model.OldPrice.HasValue) {
         <span class="sale">SALE</span>
-        <span class="old-price">$@Model.OldPrice</span>
+        <span class="old-price">@Model.OldPrice?.ToString("C0")</span>
     }
 </div>
 

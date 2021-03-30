@@ -1,0 +1,30 @@
+﻿.filter{
+    float: left;
+    width: 20%;
+    margin: 0 0 0 2%;
+    border: 1px solid blue;
+}
+
+.grid{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    float: right;
+    width: 73%;
+    margin: 0 2%;
+}
+
+@media (max-width: 940px) {
+    .filter{
+        float: none;
+        width: 100%;
+        margin: 0;
+        display: none;
+    }
+    
+    .grid{
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+}

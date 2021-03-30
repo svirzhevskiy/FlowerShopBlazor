@@ -1,0 +1,26 @@
+﻿@page "/Catalog"
+@using FlowerShopBlazor.Models
+@using FlowerShopBlazor.Data
+
+<div class="filter">
+    filter
+</div>
+<div class="grid">
+    @if (_products != null && _products.Count > 0)
+    {
+        foreach (var product in _products)
+        {
+            <ProductCard Model="@product"/>
+        }
+    }
+</div>
+
+@code {
+    private List<ProductModel> _products;
+    
+    protected async override Task OnInitializedAsync()
+    {
+        _products = FlowerData.GetFakeData();
+    }
+
+}
