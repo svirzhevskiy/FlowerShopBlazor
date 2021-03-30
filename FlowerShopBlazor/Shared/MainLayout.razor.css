@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 940px) {
     .wrapper{
         width: 98%;
     }

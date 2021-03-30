@@ -1,0 +1,44 @@
+﻿button{
+    border: 0.15rem solid white;
+    border-radius: 0.45rem;
+    background: rgba(193, 193, 193, 0.1);
+    backdrop-filter: blur(3px) saturate(48%) contrast(45%) brightness(150%);
+    color: black;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow:2px 2px 2px 0px rgba(255,255,255,.3),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+}
+
+button:focus{
+    outline: none;
+}
+
+button:disabled{
+    outline: none;
+    color: black;
+    background: rgba(193, 193, 193, 0.5);
+}
+
+button:hover{
+    transition: all 0.3s ease;
+    background: black;
+    color: white;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+button:active{
+    transition: all 0.1s ease;
+    outline: none;
+    color: black;
+    background: rgba(193, 193, 193, 0.5);
+    box-shadow:2px 2px 2px 0px rgba(255,255,255,.3),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+}
