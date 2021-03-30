@@ -1,0 +1,17 @@
+﻿@using FlowerShopBlazor.Models
+
+<div class="card">
+    <img src="@Model.Image" alt="product image"/>
+    <div class="title">@Model.Title</div>
+    <span class="price">$@Model.Price</span>
+    <Button>ADD TO CART</Button>
+    @if (Model.OldPrice.HasValue) {
+        <span class="sale">SALE</span>
+        <span class="old-price">$@Model.OldPrice</span>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public ProductModel Model { get; set; }
+}
