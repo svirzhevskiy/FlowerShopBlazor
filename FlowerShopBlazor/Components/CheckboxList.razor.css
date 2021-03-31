@@ -1,0 +1,61 @@
+﻿.checkbox-list{
+    list-style: none;
+    padding: 0;
+}
+
+.checkbox-list label{
+    font-weight: 200;
+}
+
+/* checkbox -------------------------------------- */
+input[type="checkbox"] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+input[type="checkbox"]+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+input[type="checkbox"]+label::before {
+    content: '';
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 0.13rem solid #9D9D9D;
+    background-color: #FDFDFD;
+    border-radius: 0.15em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+}
+input[type="checkbox"]:checked+label::before {
+    border-color: #0f4c00;
+    background-color: #0f4c00;
+}
+/* стили при наведении курсора на checkbox */
+input[type="checkbox"]:not(:disabled):not(:checked)+label:hover::before {
+    border-color: #c4c4c4;
+}
+/* стили для активного состояния чекбокса (при нажатии на него) */
+input[type="checkbox"]:not(:disabled):active+label::before {
+    background-color: #197700;
+    border-color: #197700;
+}
+/* стили для чекбокса, находящегося в фокусе */
+input[type="checkbox"]:focus+label::before {
+    box-shadow: 0 0 0 0.2rem rgba(124, 124, 124, 0.25);
+}
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+input[type="checkbox"]:focus:not(:checked)+label ::before{
+    border-color: #9b9b9b;
+}
+/* стили для чекбокса, находящегося в состоянии disabled */
+input[type="checkbox"]:disabled+label::before {
+    background-color: #f8f8f8;
+    border-color: #292929;
+}

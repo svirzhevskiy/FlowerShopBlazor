@@ -1,0 +1,17 @@
+﻿<ul class="checkbox-list">
+    @foreach (var (title, isChecked) in Items)
+    {
+        <li>
+            <input type="checkbox" class="checkbox" id="@title" checked="@isChecked" @onchange="() => OnToggle.InvokeAsync(title)" />
+            <label for="@title">@title</label>
+        </li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public Dictionary<string, bool> Items { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> OnToggle { get; set; }
+}
