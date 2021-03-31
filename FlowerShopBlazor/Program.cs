@@ -20,6 +20,8 @@ namespace FlowerShopBlazor
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddSingleton<AppState>();
+            builder.Services.AddSingleton<ProductService>();
+            builder.Services.AddSingleton<CategoryService>();
 
             await builder.Build().RunAsync();
         }

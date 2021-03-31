@@ -1,4 +1,6 @@
-﻿<header>
+﻿@inject NavigationManager NavigationManager
+
+<header>
     <div><img src="logo.png" alt="Lares & Penates" @onclick="() => { _showNavMenu = !_showNavMenu; }"/></div>
     <nav class="@(_showNavMenu ? "show" : "")">
         <ul>
@@ -16,6 +18,6 @@
     
     private void OnClickLink(string location)
     { 
-        
+        NavigationManager.NavigateTo(location);
     }
 }
