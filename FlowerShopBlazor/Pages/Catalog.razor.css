@@ -1,8 +1,56 @@
-﻿.filter{
+﻿.show-filters-btn{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    bottom: 2rem;
+    right: 2rem;
+    height: 2rem;
+    width: 2rem;
+    padding: 1rem;
+    border-radius: 5rem;
+    background-color: rgba(214, 214, 214, 0.1);
+    backdrop-filter: blur(4px) saturate(100%) contrast(45%) brightness(130%);
+    box-shadow: 2px 2px 2px 0px rgba(255,255,255,.3),
+                7px 7px 20px 0px rgba(0,0,0,.1),
+                4px 4px 5px 0px rgba(0,0,0,.1);
+}
+
+.filter{
     float: left;
     width: 20%;
-    margin: 0 0 0 2%;
-    border: 1px solid blue;
+    margin: 1.5rem 0;
+    padding: 0 2% 6% 2%;
+    border-radius: 1rem;
+    z-index: 90;
+    background-color: rgba(244, 245, 247, 0.5);
+}
+
+::deep .hide-filters-button{
+    display: none;
+}
+::deep .hide-filters-button{
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+.filter h3,
+.filter h4{
+    font-weight: 400;
+}
+
+.clear-filters-btn{
+    padding: 0.275rem 0.5rem;
+    margin-left: 1rem;
+    color: #929292;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 100;
+    border-radius: 0.5rem;
+}
+.clear-filters-btn:hover{
+    color: black;
+    background: rgba(159,157,164,0.44);
 }
 
 .grid{
@@ -10,16 +58,37 @@
     justify-content: center;
     flex-wrap: wrap;
     float: right;
-    width: 73%;
+    width: 72%;
     margin: 0 2%;
 }
 
 @media (max-width: 940px) {
+    .show-filters-btn{
+        display: block;
+    }
+    ::deep .hide-filters-button{
+        display: block;
+    }
+    
     .filter{
-        float: none;
-        width: 100%;
-        margin: 0;
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        float: none;
+        width: 74%;
+        margin: 14% 7% 0 7%;
+        padding: 0 6% 6% 6%;
+        backdrop-filter: blur(14px) saturate(100%) contrast(45%) brightness(130%);
+        box-shadow: 2px 2px 2px 0px rgba(255,255,255,.3),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+    }
+    .filter.show{
+        display: block;
+    }
+    .filter{
+        font-size: 1.6em;
     }
     
     .grid{

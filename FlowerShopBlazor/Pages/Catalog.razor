@@ -1,26 +1,99 @@
 ﻿@page "/Catalog"
 @using FlowerShopBlazor.Models
-@using FlowerShopBlazor.Data
+@implements IDisposable
+@inject AppState AppState
+@inject ProductService ProductService
+@inject CategoryService CategoryService
 
-<div class="filter">
-    filter
-</div>
-<div class="grid">
-    @if (_products != null && _products.Count > 0)
-    {
-        foreach (var product in _products)
+@if (_products != null)
+{
+    <img class="show-filters-btn" src="img/filter.png" alt="filters" @onclick="ToggleShowFilters" />
+    <div class="filter @(_showFilters ? "show" : "")">
+        <h3>
+            Filters
+            <span
+                class="clear-filters-btn"
+                @onclick="ResetFilters">
+                &#x2716;
+            </span>
+        </h3>
+        @foreach (var (filter, items) in _catalogFilters)
         {
-            <ProductCard Model="@product"/>
+            <h4>@filter</h4>
+            <CheckboxList Items="@items" OnToggle="item => { OnToggleFilterItem(filter, item); }"/>
         }
-    }
-</div>
+        <Button Class="hide-filters-button" OnClick="ToggleShowFilters">CLOSE</Button>
+    </div>
+
+    <div class="grid">
+        @if (_products.Count > 0)
+        {
+            foreach (var product in _products)
+            {
+                <ProductCard Model="@product"/>
+            }
+        }
+        else
+        {
+            <span>Nothing to show</span>
+        }
+    </div>
+}
 
 @code {
     private List<ProductModel> _products;
+    private CategoryModel _category;
+    private (int, int) _priceBorders = (0, 100);
     
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        _products = FlowerData.GetFakeData();
+        _category = (await CategoryService.GetAll()).First();
+        
+        _products = await ProductService.GetAll(_category.Id);
+
+        _catalogFilters = _category.Properties.ToDictionary(filter 
+            => filter, filter => ProductService.GetPropertyValues(filter));
+        
+        _priceBorders.Item1 = _products.Min(x => x.Price);
+        _priceBorders.Item2 = _products.Max(x => x.Price);
+        _priceRange = _priceBorders;
     }
 
+    private (int, int) _priceRange;
+    private Dictionary<string, Dictionary<string, bool>> _catalogFilters;
+    private void OnToggleFilterItem(string filter, string item)
+    {
+        _catalogFilters[filter][item] = !_catalogFilters[filter][item];
+        
+        _products = ProductService.Filter(_catalogFilters, _priceRange);
+    }
+    private void ResetFilters()
+    {
+        _priceRange = _priceBorders;
+
+        _catalogFilters = _category.Properties.ToDictionary(filter 
+            => filter, filter => ProductService.GetPropertyValues(filter));
+
+        _products = ProductService.Filter(_catalogFilters, _priceRange);
+    }
+
+    private bool _showFilters;
+    private void ToggleShowFilters() => _showFilters = !_showFilters;
+
+
+    private async Task AppState_StateChanged(ComponentBase source, string property)
+    {
+        if (source != this)
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    protected override void OnInitialized()
+    {
+        AppState.StateChanged += async (source, property) => await AppState_StateChanged(source, property);
+    }
+    void IDisposable.Dispose()
+    {
+        AppState.StateChanged -= async (source, property) => await AppState_StateChanged(source, property);
+    }
 }

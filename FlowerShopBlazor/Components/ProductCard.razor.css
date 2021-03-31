@@ -50,10 +50,12 @@
     left: 50%;
     transform: translate(-200%, -20%);
     z-index: 10;
+    box-shadow: none;
 }
 .card:hover ::deep button{
     transition: transform 0.5s;
     transform: translate(-50%, 0);
+    box-shadow: none;
 }
 
 .card::before {
