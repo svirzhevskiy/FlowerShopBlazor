@@ -1,0 +1,44 @@
+﻿.toast{
+    position: fixed;
+    top: -5rem;
+    left: 50%;
+    border-radius: 1rem;
+    z-index: 200;
+    background-color: rgba(214, 214, 214, 0.5);
+    backdrop-filter: blur(4px) saturate(100%) contrast(45%) brightness(130%);
+    box-shadow: 5px 5px 10px -5px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 3.3rem;
+    padding: 0 1rem;
+}
+
+/* Animation */
+.appear{
+    animation: slideFromTop 0.5s cubic-bezier(.55,.09,.55,1.58) 0s 1 normal forwards;
+}
+.disappear{
+    animation: slideToTop 0.5s cubic-bezier(.71,-0.56,.57,.85) 0s 1 normal forwards;
+}
+@keyframes slideFromTop {
+    0%  { transform: translate(-50%, 0%); }
+    100%{ transform: translate(-50%, 200%); }
+}
+@keyframes slideToTop {
+    0%  { transform: translate(-50%, 200%); }
+    100%{ transform: translate(-50%, 0%); }
+}
+/* --- */
+
+img{
+    height: 2rem;
+    width: 2rem;
+    margin: 0 1rem;
+}
+
+label{
+    margin: 0 1rem;
+    font-size: 1.1em;
+    font-weight: 500;
+}

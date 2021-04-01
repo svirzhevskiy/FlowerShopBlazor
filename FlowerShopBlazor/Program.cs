@@ -22,6 +22,7 @@ namespace FlowerShopBlazor
             builder.Services.AddSingleton<AppState>();
             builder.Services.AddSingleton<ProductService>();
             builder.Services.AddSingleton<CategoryService>();
+            builder.Services.AddSingleton<ToastService>();
 
             await builder.Build().RunAsync();
         }

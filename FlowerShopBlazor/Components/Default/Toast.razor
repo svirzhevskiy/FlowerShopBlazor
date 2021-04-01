@@ -1,0 +1,49 @@
+﻿@using FlowerShopBlazor.Common
+@inject ToastService ToastService
+@implements IDisposable
+
+<div class="toast @_cssClass">
+    <img src="@_imgSrc" alt="icon"/>
+    <label>@_message</label>
+</div>
+
+@code {
+    private string _message;
+    private ToastType _type;
+    private string _cssClass;
+
+    private string _imgSrc = "img/error.png";
+
+    protected override void OnInitialized()
+    {
+        _imgSrc = _type switch
+        {
+            ToastType.Success => "img/success.png",
+            ToastType.Question => "img/question.png",
+            _ => _imgSrc
+        };
+        
+        ToastService.OnShow += ShowToast;
+        ToastService.OnHide += HideToast;
+    }
+
+    private void ShowToast(string message, ToastType type)
+    {
+        _message = message;
+        _type = type;
+        _cssClass = "appear";
+        StateHasChanged();
+    }
+
+    private void HideToast()
+    {
+        _cssClass = "disappear";
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        ToastService.OnShow -= ShowToast;
+    }
+
+}
