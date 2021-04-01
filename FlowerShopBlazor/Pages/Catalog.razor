@@ -1,9 +1,11 @@
 ﻿@page "/Catalog"
 @using FlowerShopBlazor.Models
+@using FlowerShopBlazor.Common
 @implements IDisposable
 @inject AppState AppState
 @inject ProductService ProductService
 @inject CategoryService CategoryService
+@inject ToastService ToastService
 
 @if (_products != null)
 {
@@ -75,6 +77,8 @@
             => filter, filter => ProductService.GetPropertyValues(filter));
 
         _products = ProductService.Filter(_catalogFilters, _priceRange);
+        
+        ToastService.ShowToast("Filters have been reset", ToastType.Success);
     }
 
     private bool _showFilters;
