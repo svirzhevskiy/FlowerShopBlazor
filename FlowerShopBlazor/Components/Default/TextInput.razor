@@ -1,0 +1,39 @@
+﻿<input 
+    type="@Type" 
+    class="@Class" 
+    value="@_value"
+    placeholder="@Placeholder"
+    @oninput="(val) => {OnInputEventCallback(val.Value?.ToString());}"
+    />
+
+@code {
+    [Parameter]
+    public string Type { get; set; } = "text";
+    [Parameter]
+    public string Class { get; set; }
+    [Parameter]
+    public string Placeholder { get; set; }
+    [Parameter]
+    public EventCallback<string> OnInput { get; set; }
+    [Parameter]
+    public Func<string, bool> ValidationRules { get; set; }
+    
+    private string _value = "";
+
+    private void OnInputEventCallback(string value)
+    {
+        _value = value;
+
+        if (ValidationRules != null && ValidationRules.Invoke(_value))
+        {
+            if (Class.Contains(" error"))
+                Class = Class.Replace(" error", "");
+        }
+        else
+        {
+            Class += " error";
+        }
+
+        OnInput.InvokeAsync(_value);
+    }
+}

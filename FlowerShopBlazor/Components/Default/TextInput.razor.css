@@ -1,0 +1,22 @@
+﻿input{
+    box-shadow: none;
+    outline: none;
+    background: transparent;
+    border: 0.15rem solid darkgrey;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+    color: black;
+    font-weight: 600;
+}
+
+input:focus{
+    border-color: #0f4c00;
+    caret-color: #0f4c00;
+    color: #0f4c00;
+}
+
+input.error,
+input:focus.error{
+    border-color: #790000;
+    color: #790000;
+}
