@@ -4,7 +4,7 @@
     <div><img src="logo.png" alt="Lares & Penates" @onclick="() => { _showNavMenu = !_showNavMenu; }"/></div>
     <nav class="@(_showNavMenu ? "show" : "")">
         <ul>
-            <li><span @onclick='() => OnClickLink("/")'>HOME</span></li>
+            <li><span @onclick='() => OnClickLink("/Login")'>HOME</span></li>
             <li><span @onclick='() => OnClickLink("/Catalog")'>CATALOG</span></li>
             <li><span @onclick='() => OnClickLink("/Product")'>PRODUCT</span></li>
             <li><span @onclick='() => OnClickLink("/Cart")'>CART</span></li>

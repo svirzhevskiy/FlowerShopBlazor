@@ -12,8 +12,26 @@
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
 </head>
 
+<style>
+    .loading{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 4rem;
+        transform: translate(-50%, -50%);
+        animation: loadingAnimation 3s linear 0s infinite normal;
+    }
+    @keyframes loadingAnimation {
+        0% { transform: rotate(0) translate(0); }
+        50% { transform: rotate(180deg) translate(20%, -20%); }
+        100% { transform: rotate(160deg) translate(0); }
+    }
+</style>
+
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <img src="/img/loading.png" alt="loading..." class="loading"/>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.

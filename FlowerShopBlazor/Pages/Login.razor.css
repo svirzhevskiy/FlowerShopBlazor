@@ -1,0 +1,117 @@
+﻿@font-face {
+    font-family: "Great Vibes";
+    src: url(fonts/GreatVibes-Regular.ttf);
+}
+
+.background{
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    font-family: Roboto, sans-serif;
+    background-color: rgb(156 191 193);
+}
+.background:before{
+    content: '';
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    background-image: url("img/login-back.jpg");
+    background-size: cover;
+    backdrop-filter: blur(4px) saturate(100%) contrast(45%) brightness(130%);
+    clip-path: polygon(0 0, 66% 0, 100% 100%, 56% 100%, 0 79%);
+}
+
+.card{
+    position: relative;
+    width: 70%;
+    height: 80vh;
+    margin: Calc(10vh - 2rem) auto;
+    background-color: rgba(234, 234, 234, 0.5);
+    backdrop-filter: blur(4px) saturate(100%) contrast(45%) brightness(130%);
+    box-shadow: 5px 5px 10px -5px rgba(0,0,0,0.5);
+    border-radius: 1rem;
+}
+
+.image-block{
+    position: relative;
+    float: left;
+    width: 65%;
+    height: 100%;
+    border-radius: 1rem;
+    background-color: rgba(175, 206, 208, 0.55);
+}
+.image-block h2{
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    transform: translate(-50%, 0);
+    font-weight: 200;
+    font-family: "Great Vibes", sans-serif;
+    font-size: 2em;
+    color: rgb(23 61 64);
+}
+.truck{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+    bottom: 10%;
+}
+
+.form-block{
+    float: right;
+    width: Calc(35% - 4rem);
+    padding: 2rem;
+}
+.form-block > span{
+    display: block;
+    font-size: 0.8em;
+    color: rgb(84, 84, 84);
+    padding: 0.4rem 0;
+}
+.form-block ::deep input{
+    margin: 0.5rem 0;
+}
+
+.switch-form{
+    margin: 3rem 0 1rem 0;
+    cursor: pointer;
+}
+.switch-form span{
+    font-weight: 600;
+    padding: 0.4rem;
+}
+.switch-form span:hover{
+    color: #0f4c00;
+    border-bottom: 0.2rem solid #0f4c00;
+}
+
+.footer{
+    display: block;
+    color: rgb(84, 84, 84);
+    font-size: 0.8em;
+    margin: 1rem 0;
+}
+.footer span{
+    padding-bottom: 0.2rem;
+    color: #0f4c00;
+    border-bottom: 0.15rem solid #0f4c00;
+    cursor: pointer;
+}
+
+@media (max-width: 940px) {
+    .image-block{
+        display: none;
+    }
+    
+    .form-block{
+        width: Calc(100% - 2rem);
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .card{
+        width: 90%;
+    }
+}

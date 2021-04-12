@@ -15,4 +15,9 @@
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Pages\Index.razor" />
+    <Content Remove="wwwroot\img\login-img.jpg" />
+  </ItemGroup>
+
 </Project>

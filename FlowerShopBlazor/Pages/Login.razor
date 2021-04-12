@@ -1,0 +1,81 @@
+﻿@page "/Login"
+@using FlowerShopBlazor.Common
+@layout EmptyLayout
+@inject ToastService ToastService
+@inject NavigationManager NavigationManager
+
+<div class="background">
+    <div class="card">
+        <div class="image-block">
+            <h2>Lares & Penates</h2>
+            <div class="truck">
+                <SvgTruck/>
+            </div>
+        </div>
+        <div class="form-block">
+            <h3>Join to our shop right now!</h3>
+            <h5>Get the opportunity to purchase more than 3 types of plants and home decorations</h5>
+            <div class="switch-form">
+                <span @onclick="() => { _isLoginForm = true; }">Login</span>
+                <span @onclick="() => { _isLoginForm = false; }">Register</span>
+            </div>
+            @if (_isLoginForm)
+            {
+                <span>Login with your credentials:</span>
+                <TextInput 
+                    Placeholder="email" 
+                    ValidationRules="@_emailValidation" 
+                    OnInput="@OnInputEmail"/>
+                <br/>
+                <TextInput 
+                    Placeholder="password" 
+                    Type="password"
+                    ValidationRules="@_passValidation"
+                    OnInput="@OnInputPass"/>
+                <br/>
+            }
+            else
+            {
+                <span>Register with your email</span>
+                <TextInput 
+                    Placeholder="email"
+                    ValidationRules="@_emailValidation"
+                    OnInput="@OnInputEmail"/>
+                <br/>
+            }
+            <Button OnClick="@OnSubmitForm">Continue</Button>
+            <div class="footer">
+                Or go to catalog without registration: 
+                <span @onclick='() => NavigationManager.NavigateTo("/Catalog")'>Catalog</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool _isLoginForm = true;
+
+    private string _email = string.Empty;
+    private readonly Func<string, bool> _emailValidation = e => e.Length > 9 && e.Contains('@'); 
+    private void OnInputEmail(string val) => _email = val;
+    private string _pass = string.Empty;
+    private readonly Func<string, bool> _passValidation = x => x.Length > 3;
+    private void OnInputPass(string val) => _pass = val;
+
+    private void OnSubmitForm()
+    {
+        if (!_emailValidation.Invoke(_email))
+        {
+            ToastService.ShowToast("Please, check email", ToastType.Error);
+            return;
+        }
+
+        if (!_isLoginForm && !_passValidation.Invoke(_pass))
+        {
+            ToastService.ShowToast("Please, check password", ToastType.Error);
+            return;
+        }
+
+        NavigationManager.NavigateTo("/Catalog");
+    }
+}
