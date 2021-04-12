@@ -9,20 +9,12 @@
 
 @code {
     private string _message;
-    private ToastType _type;
     private string _cssClass;
 
     private string _imgSrc = "img/error.png";
 
     protected override void OnInitialized()
     {
-        _imgSrc = _type switch
-        {
-            ToastType.Success => "img/success.png",
-            ToastType.Question => "img/question.png",
-            _ => _imgSrc
-        };
-        
         ToastService.OnShow += ShowToast;
         ToastService.OnHide += HideToast;
     }
@@ -30,7 +22,12 @@
     private void ShowToast(string message, ToastType type)
     {
         _message = message;
-        _type = type;
+        _imgSrc = type switch
+        {
+            ToastType.Success => "img/success.png",
+            ToastType.Question => "img/question.png",
+            _ => "img/error.png"
+            };
         _cssClass = "appear";
         StateHasChanged();
     }
