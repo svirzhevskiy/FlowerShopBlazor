@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FlowerShopBlazor.Services.ApiService;
 
-namespace FlowerShopBlazor.Services.ApiService
+namespace FlowerShopBlazor.Application
 {
     public interface IApiService
     {

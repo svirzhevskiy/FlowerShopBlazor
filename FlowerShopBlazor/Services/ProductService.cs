@@ -3,18 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using FlowerShopBlazor.Application;
 using FlowerShopBlazor.Data;
 using FlowerShopBlazor.Models;
 
 namespace FlowerShopBlazor.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
+        private readonly IApiService _api;
+        private const string Url = "product";
         private List<ProductModel> _allProducts = new();
+        
+        public ProductService(IApiService apiService)
+        {
+            _api = apiService;
+        }
         
         public async Task<List<ProductModel>> GetAll(Guid categoryId)
         {
-            _allProducts = FlowerData.GetFakeData();
+            try
+            {
+                var res = await _api.Get<List<ProductModel>>($"{Url}?categoryId={categoryId}");
+
+                if (res.HasSuccessStatusCode)
+                    _allProducts = res.Value;
+            }
+            catch (Exception e)
+            {
+                _allProducts = FlowerData.GetFakeData();
+                Console.WriteLine(e);
+                Console.WriteLine("Returning fake flower data...");
+            }
             
             return _allProducts;
         }

@@ -4,9 +4,9 @@
 @using FlowerShopBlazor.Common
 @implements IDisposable
 @inject AppState AppState
-@inject ProductService ProductService
-@inject CategoryService CategoryService
-@inject ToastService ToastService
+@inject IProductService ProductService
+@inject ICategoryService CategoryService
+@inject IToastService ToastService
 
 @if (_products != null)
 {

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Timers;
+using FlowerShopBlazor.Application;
 using FlowerShopBlazor.Common;
 
 namespace FlowerShopBlazor.Services
 {
-    public class ToastService : IDisposable
+    public class ToastService : IToastService, IDisposable
     {
         public event Action<string, ToastType> OnShow;
         public event Action OnHide;

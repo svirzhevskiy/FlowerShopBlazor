@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FlowerShopBlazor.Application;
 using FlowerShopBlazor.Models;
 
 namespace FlowerShopBlazor.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly CategoryModel _fakeCategory = new()
         {

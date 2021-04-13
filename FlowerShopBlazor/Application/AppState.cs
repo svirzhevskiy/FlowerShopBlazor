@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FlowerShopBlazor.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace FlowerShopBlazor.Services
+namespace FlowerShopBlazor.Application
 {
     public class AppState
     {
