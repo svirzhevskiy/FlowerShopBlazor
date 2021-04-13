@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FlowerShopBlazor.Services;
+using FlowerShopBlazor.Services.ApiService;
 
 namespace FlowerShopBlazor
 {
@@ -23,6 +24,7 @@ namespace FlowerShopBlazor
             builder.Services.AddSingleton<ProductService>();
             builder.Services.AddSingleton<CategoryService>();
             builder.Services.AddSingleton<ToastService>();
+            builder.Services.AddScoped<IApiService, ApiService>();
 
             await builder.Build().RunAsync();
         }
