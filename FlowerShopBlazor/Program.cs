@@ -29,10 +29,16 @@ namespace FlowerShopBlazor
             
             builder.Services.AddScoped<IToastService, ToastService>();
 
+            builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-            await builder.Build().RunAsync();
+            var host = builder.Build();
+
+            var accountService = host.Services.GetRequiredService<IAccountService>();
+            await accountService.Initialize();
+
+            await host.RunAsync();
         }
     }
 }

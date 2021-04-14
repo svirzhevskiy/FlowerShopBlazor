@@ -1,7 +1,7 @@
 ﻿@using FlowerShopBlazor.Models
 @using FlowerShopBlazor.Common
-@inject AppState AppState
-@inject IToastService ToastService
+@inject AppState _appState
+@inject IToastService _toastService
 
 <div class="card">
     <img src="@Model.Image" alt="product image"/>
@@ -20,7 +20,7 @@
 
     private void OnClickAdd()
     {
-        AppState.Cart.Add(Model);
-        ToastService.ShowToast("Added to your cart", ToastType.Success);
+        _appState.Cart.Add(Model);
+        _toastService.ShowToast("Added to your cart", ToastType.Success);
     }
 }

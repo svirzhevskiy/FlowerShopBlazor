@@ -1,12 +1,14 @@
 ﻿@page "/"
 @page "/Catalog"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
 @using FlowerShopBlazor.Models
 @using FlowerShopBlazor.Common
 @implements IDisposable
-@inject AppState AppState
-@inject IProductService ProductService
-@inject ICategoryService CategoryService
-@inject IToastService ToastService
+@inject AppState _appState
+@inject IProductService _productService
+@inject ICategoryService _categoryService
+@inject IToastService _toastService
 
 @if (_products != null)
 {
@@ -50,12 +52,12 @@
     
     protected override async Task OnInitializedAsync()
     {
-        _category = (await CategoryService.GetAll()).First();
+        _category = (await _categoryService.GetAll()).First();
         
-        _products = await ProductService.GetAll(_category.Id);
+        _products = await _productService.GetAll(_category.Id);
 
         _catalogFilters = _category.Properties.ToDictionary(filter 
-            => filter, filter => ProductService.GetPropertyValues(filter));
+            => filter, filter => _productService.GetPropertyValues(filter));
         
         _priceBorders.Item1 = _products.Min(x => x.Price);
         _priceBorders.Item2 = _products.Max(x => x.Price);
@@ -68,18 +70,18 @@
     {
         _catalogFilters[filter][item] = !_catalogFilters[filter][item];
         
-        _products = ProductService.Filter(_catalogFilters, _priceRange);
+        _products = _productService.Filter(_catalogFilters, _priceRange);
     }
     private void ResetFilters()
     {
         _priceRange = _priceBorders;
 
         _catalogFilters = _category.Properties.ToDictionary(filter 
-            => filter, filter => ProductService.GetPropertyValues(filter));
+            => filter, filter => _productService.GetPropertyValues(filter));
 
-        _products = ProductService.Filter(_catalogFilters, _priceRange);
+        _products = _productService.Filter(_catalogFilters, _priceRange);
         
-        ToastService.ShowToast("Filters have been reset", ToastType.Success);
+        _toastService.ShowToast("Filters have been reset", ToastType.Success);
     }
 
     private bool _showFilters;
@@ -95,10 +97,10 @@
     }
     protected override void OnInitialized()
     {
-        AppState.StateChanged += async (source, property) => await AppState_StateChanged(source, property);
+        _appState.StateChanged += async (source, property) => await AppState_StateChanged(source, property);
     }
     void IDisposable.Dispose()
     {
-        AppState.StateChanged -= async (source, property) => await AppState_StateChanged(source, property);
+        _appState.StateChanged -= async (source, property) => await AppState_StateChanged(source, property);
     }
 }

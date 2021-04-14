@@ -24,6 +24,7 @@ namespace FlowerShopBlazor.Services
         {
             try
             {
+                throw new Exception("Developer mode");
                 var res = await _api.Get<List<ProductModel>>($"{Url}?categoryId={categoryId}");
 
                 if (res.HasSuccessStatusCode)

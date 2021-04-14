@@ -1,8 +1,9 @@
 ﻿@page "/Login"
-@using FlowerShopBlazor.Common
+@using System.Web
 @layout EmptyLayout
-@inject IToastService ToastService
-@inject NavigationManager NavigationManager
+@inject IToastService _toastService
+@inject NavigationManager _navigationManager
+@inject IAccountService _accountService
 
 <div class="background">
     <div class="card">
@@ -46,7 +47,7 @@
             <Button OnClick="@OnSubmitForm">Continue</Button>
             <div class="footer">
                 Or go to catalog without registration: 
-                <span @onclick='() => NavigationManager.NavigateTo("/Catalog")'>Catalog</span>
+                <span @onclick='() => _navigationManager.NavigateTo("/Catalog")'>Catalog</span>
             </div>
         </div>
     </div>
@@ -62,20 +63,25 @@
     private readonly Func<string, bool> _passValidation = x => x.Length > 3;
     private void OnInputPass(string val) => _pass = val;
 
-    private void OnSubmitForm()
+    private async void OnSubmitForm()
     {
-        if (!_emailValidation.Invoke(_email))
-        {
-            ToastService.ShowToast("Please, check email", ToastType.Error);
-            return;
-        }
+        // if (!_emailValidation.Invoke(_email))
+        // {
+        //     ToastService.ShowToast("Please, check email", ToastType.Error);
+        //     return;
+        // }
+        //
+        // if (!_isLoginForm && !_passValidation.Invoke(_pass))
+        // {
+        //     ToastService.ShowToast("Please, check password", ToastType.Error);
+        //     return;
+        // }
 
-        if (!_isLoginForm && !_passValidation.Invoke(_pass))
-        {
-            ToastService.ShowToast("Please, check password", ToastType.Error);
-            return;
-        }
-
-        NavigationManager.NavigateTo("/Catalog");
+        
+        //todo add loading indicator
+        await _accountService.Login(_email, _pass);
+        //todo fix return url
+        var returnUrl = HttpUtility.ParseQueryString(new Uri(_navigationManager.Uri).Query)["returnUrl"] ?? "/Catalog";
+        _navigationManager.NavigateTo(returnUrl);
     }
 }

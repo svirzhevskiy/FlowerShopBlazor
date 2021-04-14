@@ -1,5 +1,5 @@
 ﻿@using FlowerShopBlazor.Common
-@inject IToastService ToastService
+@inject IToastService _toastService
 @implements IDisposable
 
 <div class="toast @_cssClass">
@@ -15,8 +15,8 @@
 
     protected override void OnInitialized()
     {
-        ToastService.OnShow += ShowToast;
-        ToastService.OnHide += HideToast;
+        _toastService.OnShow += ShowToast;
+        _toastService.OnHide += HideToast;
     }
 
     private void ShowToast(string message, ToastType type)
@@ -40,7 +40,7 @@
 
     public void Dispose()
     {
-        ToastService.OnShow -= ShowToast;
+        _toastService.OnShow -= ShowToast;
     }
 
 }
