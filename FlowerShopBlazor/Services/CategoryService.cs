@@ -34,7 +34,6 @@ namespace FlowerShopBlazor.Services
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
             return new() {_fakeCategory};
         }
