@@ -10,7 +10,7 @@
     [Parameter]
     public string Type { get; set; } = "text";
     [Parameter]
-    public string Class { get; set; }
+    public string Class { get; set; } = string.Empty;
     [Parameter]
     public string Placeholder { get; set; }
     [Parameter]
@@ -31,7 +31,8 @@
         }
         else
         {
-            Class += " error";
+            if (!Class.Contains(" error"))
+                Class += " error";
         }
 
         OnInput.InvokeAsync(_value);
